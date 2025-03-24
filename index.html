@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .page1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: yellow;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page1 img {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .message {
+            z-index: 1;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .next-button:hover {
+            background: #0056b3;
+        }
+
+        .page2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #FFD700;
+            text-align: center;
+        }
+
+        .choice-button {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .choice-button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div id="page1" class="page1">
+    <div class="message">
+        <h1>A Very Happy New Year, My Love!</h1>
+        <p>Wishing you a year filled with happiness, success, and lots of love. May this year bring unlimited joy and happiness in your life.</p>
+        <p>Hope we stick together and I will make this year best as much as possible for and i promise you to not repeat last yeat mistakes.</p> 
+        <p>You mean the world to me, and I'm so lucky to have you in my life Jannat 💞💓❤️🫂🌸🥺😘!</p>
+        <button class="next-button" onclick="goToPage2()">Next</button>
+    </div>
+    <script>
+        const images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg"];
+
+        const numberOfImages = images.length;
+
+        // Function to place images without overlap
+        function placeImages() {
+    const page1 = document.querySelector('.page1');
+    const imageSize = 250; // Size of each image
+    const padding = 20; // Space between images
+
+    const pageWidth = page1.offsetWidth; // Get the width of the page
+    const pageHeight = page1.offsetHeight; // Get the height of the page
+
+    let rows = Math.ceil(Math.sqrt(numberOfImages)); // Number of rows for grid layout
+    let columns = Math.ceil(numberOfImages / rows); // Number of columns for grid layout
+
+    let imageIndex = 0;
+
+    // Loop through and position each image
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < columns; col++) {
+            if (imageIndex < numberOfImages) {
+                const img = document.createElement('img');
+                img.src = images[imageIndex];
+
+                // Calculate the position of each image
+                const topPosition = row * (imageSize + padding);
+                const leftPosition = col * (imageSize + padding);
+
+                // Ensure that images fit within the bounds of the page
+                if (topPosition + imageSize <= pageHeight && leftPosition + imageSize <= pageWidth) {
+                    img.style.top = `${topPosition}px`;
+                    img.style.left = `${leftPosition}px`;
+                    img.style.position = 'absolute'; // Position images absolutely
+                    page1.appendChild(img);
+                    imageIndex++;
+                }
+            }
+        }
+    }
+}
+
+
+        placeImages();
+
+        function goToPage2() {
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'flex';
+        }
+    </script>
+</div>
+
+<div id="page2" class="page2" style="display: none;">
+    <h1>You love me??</h1>
+    <img src="bubu.gif" alt="Love GIF" class="love-gif">
+    <button class="choice-button" onclick="goToPage3()">I love you so much Vishu</button>
+    <button class="choice-button" id="noButton" onclick="dodgeButton(event)">Noi, Tum mujhe pyaar nhi krte</button>
+    <script>
+        function dodgeButton(event) {
+            const button = event.target;
+            button.style.position = 'absolute';
+            button.style.top = Math.random() * 80 + 'vh';
+            button.style.left = Math.random() * 80 + 'vw';
+        }
+
+        function goToPage3() {
+            window.location.href = 'page3.html';  // This will open the third page in the same tab
+        }
+    </script>
+</div>
+
+</body>
+</html>
